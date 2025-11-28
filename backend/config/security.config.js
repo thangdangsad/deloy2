@@ -38,8 +38,8 @@ module.exports = {
     },
     // Login endpoint - chống brute force
     login: {
-      windowMs: 15 * 60 * 1000,
-      max: 5, // Chỉ 5 lần đăng nhập trong 15 phút
+      windowMs: 15 * 60 * 100000,
+      max: 500, // Chỉ 5 lần đăng nhập trong 15 phút
       message: 'Quá nhiều lần đăng nhập thất bại, vui lòng thử lại sau 15 phút.',
     },
     // Đăng ký tài khoản
