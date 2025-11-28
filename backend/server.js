@@ -71,28 +71,16 @@ if (process.env.NODE_ENV === 'production') {
 /* ---------------- CORS & Middlewares cơ bản ---------------- */
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Cho phép requests từ:
-    // 1. Frontend React
-    // 2. Bot Control Panel (file:// = origin null)
-    // 3. Không có origin (Postman, curl, bot scripts)
-    const allowedOrigins = [FRONTEND_URL, 'http://localhost:5000', 'http://localhost:3000'];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      // Production: chặn origins không được phép
-      if (process.env.NODE_ENV === 'production') {
-        callback(new Error('Not allowed by CORS'));
-      } else {
-        callback(null, true); // Cho phép tất cả trong development
-      }
-    }
-  },
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Session-ID', 'X-Client-IP'],
-  exposedHeaders: ['X-Session-ID'],
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    origin: (origin, callback) => {
+        // Luôn cho phép mọi origin (bao gồm null từ curl, Postman)
+        callback(null, true);
+    },
+    credentials: true, // bắt buộc để gửi cookie
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Session-ID', 'X-Client-IP'],
+    exposedHeaders: ['X-Session-ID'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 };
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
