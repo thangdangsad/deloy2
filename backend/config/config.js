@@ -9,6 +9,7 @@ module.exports = {
         port: process.env.DB_PORT,
         dialect: "mssql",
         dialectOptions: {
+            server: process.env.DB_SERVER,
             options: {
                 encrypt: process.env.DB_SSL === "true",
                 trustServerCertificate: true
@@ -29,6 +30,7 @@ module.exports = {
         port: process.env.DB_PORT,
         dialect: "mssql",
         dialectOptions: {
+            server: process.env.DB_SERVER,
             options: {
                 encrypt: process.env.DB_SSL === "true",
                 trustServerCertificate: true
@@ -49,6 +51,7 @@ module.exports = {
         port: process.env.DB_PORT,
         dialect: "mssql",
         dialectOptions: {
+            server: process.env.DB_SERVER,
             options: {
                 encrypt: process.env.DB_SSL === "true",
                 trustServerCertificate: true
